@@ -1,0 +1,19 @@
+{
+  "name": "liri-app",
+  "version": "1.0.0",
+  "description": "liri-app is similar to siri",
+  "main": "keys.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ctevnan/liri-node-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ctevnan/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/ctevnan/liri-node-app#readme"
+}

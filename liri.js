@@ -1,88 +1,44 @@
 //2: make it so you grab the data from keys.js and 
 //store it into a variable to use
-
 //3: make it so liri.js can take in the following argument: spotify-this-song
 // so if you succeed, running the following commands in your terminal (aka node.js command prompt)
 // will do the following things:
-
 //node liri.js spotify-this-song '<song name here>'
-
 //shows the following info about the chosen song in terminal:
 // -artist(s)
 // -song name
 // -preview link of the song from spotify
 // -album
 // -song name
-
 //if no song is provided then your program will default to:
 // 'whats my age again' by blink 182
-
-//module.exports is the object that is actually returned as the result of a require call
-//the exports variable is initially set to that same object. so in the module code, you would usually write something like this:
-
-//var myFunc1 = function() {...};
-//var myFunc2 = function() {...};
-//exports.myFunc1 = myFunc1;
-//exports.myFunc2 = myFunc2;
-
-//this exports or exposes the internally scoped functions myFunc1 and myFunc2
-//in the calling code you would use:
-
-//var m = require('keys.js');
-//m.myFunc1();
-
-//the last line shows how the result of require is usually just a plain object whose properties may be accessed
-
-//if you wish to assign a new object (or a function reference) to exports then you should also assign that new object to module.exports
-//note: the name added to the exports object does not have to be the same as the module's internally scoped name for the  value youre adding, so you could have
-
-//var myVeryLongInternalName = function(){...};
-//exports.shortName = myVeryLongInternalName;
-//add other objects, functions, as required
-
-//followed by
-
-//var m = require('mymodule');
-//m.shortName(); 
-//invokes module.myVeryLongInternalName
-
-//var keysData?
-
-//request spotify?
-
-//goal: make it so you grab the data from keys.js and 
-//store it into a variable to use (var secretKeys)
 
 var secretKeys = require("./keys.js");
 // secretKeys.twitterKeys.consumer_key,
 //after exporting it on the twitter keys page 
-//console.log(secretKeys.twitterKeys.consumer_key);
+console.log(secretKeys.twitterKeys.consumer_key);
 
 
 //3: make it so liri.js can take in the following argument: spotify-this-song
-// so if you succeed, running the following commands in your terminal (aka node.js command prompt)
-// will do the following things:
 var spotify = require("spotify");
 
-// console.log(spotify);
+console.log(spotify);
 console.log(process.argv);
 console.log(process.argv[2]);
 console.log(process.argv[3]);
 //node liri.js spotify-this-song '<song name here>'
-
 //shows the following info about the chosen song in terminal:
 // -artist(s)
 // -song name
 // -preview link of the song from spotify
 // -album
-
 //if no song is provided then your program will default to:
 // 'whats my age again' by blink 182
 
-// liri.js require("spotify-this-song");
-// "spotify-this-song" = ["songName", "artist", "previewLink", "album"];
-// node liri.js spotify-this-song '<hello>';
-// spotify-this-song.show("artist", "songName", "previewLink", "album");
+liri.js require("spotify-this-song");
+ "spotify-this-song" = ["songName", "artist", "previewLink", "album"];
+ node liri.js spotify-this-song '<hello>';
+ spotify-this-song.show("artist", "songName", "previewLink", "album");
 /////////////////////////////////////////////////////////////////////////////////////
 //starting next problem: movie-this
 //if you enter node liri.js movie-this '<movie name here>'
@@ -96,10 +52,9 @@ var request = require("request")
 var apiURL = "";
 var movieTitle = process.argv[3]
 var resultStringMovies = "";
-
-//for this next section, I wrote it out. I dont know what to do
-//about including the switch. I feel like it will break my code
-//if I remove the switch. (making a commit to github)
+//switch statement: a selection control mechanism used to allow
+//the value of a variable ot expression to change the control flow
+//of program execution via a multiway branch
 process.argv[3];
 var queryMovie = process.argv[3];
 var actionSearch = process.argv[2];
@@ -110,25 +65,12 @@ switch(actionSearch){
         console.log(body) //show the HTML for the Google homepage
       }
     });
-//  case "movie-this":
-//    request('http://www.omdbapi.com/t=' + queryMovie + '?Tomatoes=true') {
-//      if (!error && response.statusCode == 200) {
-//        console.log(body)
-//      }
-//    });
-//  case "movie-this":
-//    request('http://www.omdbapi.com/t=' + queryMovie + '?Short=true') {
-//      if (!error && response.statusCode == 200) {
-//        console.log(body)
-//      }
-//    }); 
-//above was commented out because it was a duplicate case of 'movie-this'
+
 var apiURL= "http://www.omdbapi.com/?t=" + queryMovie + "&y=&plot=Short&Tomatoes=True&r=json"
 //&y is year, &plot=short returns short plot desc., &tomatoes=true returns rotten tomato data, r=json will return
 //data as JSON
   request(apiURL, function (err, response, body) {
     var actionSearch = JSON.parse(body);
-    //is var actionSearch = movieObject?
     if (actionSearch.Response == "false") {
       console.log('Not found')
     } else {
@@ -159,16 +101,15 @@ var apiURL= "http://www.omdbapi.com/?t=" + queryMovie + "&y=&plot=Short&Tomatoes
     console.log("Rotten Tomatoes Link " + movieObject.tomatoURL);
   }
 }
-  //if there is no movie inputted then default to Mr. Nobody ****this needs work
-   if (data.movie.items[0].movie[0].name === undefined){
-       console.log('No movie name entered')
+//if there is no movie inputted then default to Mr. Nobody ****this needs work
+  if (data.movie.items[0].movie[0].name === undefined){
+      console.log('No movie name entered')
     }  else { console.log(data.tracks.items[0].preview_url)
-            console.log(data.tracks.items[0].name)
-            console.log(data.tracks.items[0].artists[0].name)
-            console.log(data.tracks.items[0].album.name) 
-            }           
-    });
-
+//            console.log(data.tracks.items[0].name)
+//            console.log(data.tracks.items[0].artists[0].name)
+//            console.log(data.tracks.items[0].album.name) 
+//            }           
+//    });
   break;
   case "spotify-this":
   spotify.search({ type: 'track', query: process.argv[3] }, function(err, data){
@@ -176,11 +117,6 @@ var apiURL= "http://www.omdbapi.com/?t=" + queryMovie + "&y=&plot=Short&Tomatoes
     console.log('Error occurred: ' + err);
     return;
   }
-        //do something with 'data'
-        // console.log(data.tracks.items[0].preview_url);
-        // console.log(data.tracks.items[0].name);
-        // console.log(data.tracks.items[0].artists[0].name);
-        // console.log(data.tracks.items[0].album.name);
         // if there is no song inputted then default to whats my age again by artist blink 182
      if (data.tracks.items[0].artists[0].name === undefined){
        console.log('No name entered')

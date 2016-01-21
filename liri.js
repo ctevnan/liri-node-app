@@ -35,10 +35,10 @@ console.log(process.argv[3]);
 //if no song is provided then your program will default to:
 // 'whats my age again' by blink 182
 
-liri.js require("spotify-this-song");
- "spotify-this-song" = ["songName", "artist", "previewLink", "album"];
- node liri.js spotify-this-song '<hello>';
- spotify-this-song.show("artist", "songName", "previewLink", "album");
+//liri.js require("spotify-this-song");
+// "spotify-this-song" = ["songName", "artist", "previewLink", "album"];
+// node liri.js spotify-this-song '<hello>';
+// spotify-this-song.show("artist", "songName", "previewLink", "album");
 /////////////////////////////////////////////////////////////////////////////////////
 //starting next problem: movie-this
 //if you enter node liri.js movie-this '<movie name here>'
@@ -52,12 +52,12 @@ var request = require("request")
 var apiURL = "";
 var movieTitle = process.argv[3]
 var resultStringMovies = "";
-//switch statement: a selection control mechanism used to allow
-//the value of a variable ot expression to change the control flow
-//of program execution via a multiway branch
 process.argv[3];
 var queryMovie = process.argv[3];
 var actionSearch = process.argv[2];
+//switch statement: a selection control mechanism used to allow
+//the value of a variable ot expression to change the control flow
+//of program execution via a multiway branch
 switch(actionSearch){
   case "movie-this":
     request('http://www.omdbapi.com/?t=' + queryMovie, function(error, response, body) {
@@ -102,14 +102,14 @@ var apiURL= "http://www.omdbapi.com/?t=" + queryMovie + "&y=&plot=Short&Tomatoes
   }
 }
 //if there is no movie inputted then default to Mr. Nobody ****this needs work
-  if (data.movie.items[0].movie[0].name === undefined){
-      console.log('No movie name entered')
-    }  else { console.log(data.tracks.items[0].preview_url)
-//            console.log(data.tracks.items[0].name)
-//            console.log(data.tracks.items[0].artists[0].name)
-//            console.log(data.tracks.items[0].album.name) 
-//            }           
-//    });
+//  if (data.movie.items[0].movie[0].name === undefined){
+//      console.log('No movie name entered')
+//    }  else { console.log(movieObject.Title)
+//            console.log()
+//            console.log()
+//            console.log() 
+            }           
+    });
   break;
   case "spotify-this":
   spotify.search({ type: 'track', query: process.argv[3] }, function(err, data){

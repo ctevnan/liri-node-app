@@ -89,8 +89,17 @@ console.log(process.argv[3]);
 //this would output the following into terminal:
 // title, year, IMDB rating, country, language, plot, actors, Rotten Tomatoes Rating, Rotten Tomatoes Url,
 //if no movie is provided, then the program will output info for the movie 'Mr. Nobody'
-var request = require('request');
+//adding a line above what I originally started with (var request = ...etc)
+exports.moviesOMDB = function() {
 
+var request = require("request")
+var apiURL = "";
+var movieTitle = process.argv[3]
+var resultStringMovies = "";
+
+//for this next section, I wrote it out. I dont know what to do
+//about including the switch. I feel like it will break my code
+//if I remove the switch. (making a commit to github)
 process.argv[3];
 var queryMovie = process.argv[3];
 var actionSearch = process.argv[2];
@@ -101,6 +110,65 @@ switch(actionSearch){
         console.log(body) //show the HTML for the Google homepage
       }
     });
+//  case "movie-this":
+//    request('http://www.omdbapi.com/t=' + queryMovie + '?Tomatoes=true') {
+//      if (!error && response.statusCode == 200) {
+//        console.log(body)
+//      }
+//    });
+//  case "movie-this":
+//    request('http://www.omdbapi.com/t=' + queryMovie + '?Short=true') {
+//      if (!error && response.statusCode == 200) {
+//        console.log(body)
+//      }
+//    }); 
+//above was commented out because it was a duplicate case of 'movie-this'
+var apiURL= "http://www.omdbapi.com/?t=" + queryMovie + "&y=&plot=Short&Tomatoes=True&r=json"
+//&y is year, &plot=short returns short plot desc., &tomatoes=true returns rotten tomato data, r=json will return
+//data as JSON
+  request(apiURL, function (err, response, body) {
+    var actionSearch = JSON.parse(body);
+    //is var actionSearch = movieObject?
+    if (actionSearch.Response == "false") {
+      console.log('Not found')
+    } else {
+        resultShow(actionSearch); 
+    }
+  });
+  //The resultShow refers to another function that console logs the json response
+  //write a resultShow function that will print the result
+  function resultShow(movieObject){
+    //this function takes in the value of the resultShow variable and 
+    //returns the value of the variable movieObject
+    console.log("Title: " + movieObject.Title);
+    //this returns the title of the movie in console
+    console.log("Year: " + movieObject.Year);
+    //this outputs the year the movie came out
+    console.log("Plot: " + movieObject.Plot);
+    //this shows the plot in console
+    console.log("Actors " + movieObject.Actors);
+    //same as before, but it shows the Actors
+    console.log("Country " + movieObject.Country);
+    //shows the Country
+    console.log("Language " + movieObject.Language);
+    //shows the language the film is in, in console
+    console.log("IMDB Rating " + movieObject.imdbRating);
+    //shows the imdb rating
+    console.log("Rotten Tomatoes " + movieObject.tomatoRating);
+    //now you can find the tomato rating in console
+    console.log("Rotten Tomatoes Link " + movieObject.tomatoURL);
+  }
+}
+  //if there is no movie inputted then default to Mr. Nobody ****this needs work
+   if (data.movie.items[0].movie[0].name === undefined){
+       console.log('No movie name entered')
+    }  else { console.log(data.tracks.items[0].preview_url)
+            console.log(data.tracks.items[0].name)
+            console.log(data.tracks.items[0].artists[0].name)
+            console.log(data.tracks.items[0].album.name) 
+            }           
+    });
+
   break;
   case "spotify-this":
   spotify.search({ type: 'track', query: process.argv[3] }, function(err, data){
